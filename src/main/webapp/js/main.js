@@ -5,12 +5,7 @@ var sampleApp = angular.module("sampleApp",['ngResource']);
 
 return $resource('registrationService', {}, {
             createUser : {
-                headers: {'Content-Type':'application/json'},
                 url:"/register/saveUser",
-                params : {
-                username : "@userInfo.username",
-                password : "@userInfo.password",
-                },
                 method: "POST"
             }
     });
@@ -20,12 +15,7 @@ sampleApp.factory('registrationServiceWorking',['$resource',function($resource){
 
 return $resource('registrationServiceWorking', {}, {
             createUser : {
-                headers: {'Content-Type':'application/json'},
                 url:"/register/saveUser",
-                params : {
-                username : "@username",
-                password : "@password",
-                },
                 method: "POST"
             }
     });
@@ -37,7 +27,7 @@ return $resource('registrationServiceWorking', {}, {
     $scope.userData = {};
       console.log("saving");
     $scope.saveUser = function(){
-    registrationService.createUser({userInfo:$scope.userData}).$promise.then(function(response){
+    registrationService.createUser({username:$scope.userData.username,password:$scope.userData.password}).$promise.then(function(response){
     alert(response.message)
 
     });
